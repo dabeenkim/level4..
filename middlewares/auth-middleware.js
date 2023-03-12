@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const { Users } = require("../models");
+const { Comments } = require("../models")
 
 module.exports = async (req, res, next) => {
-  // try {
+  try {
     const { authorization } = req.cookies;
     const [tokenType, token] = authorization.split(" ");
 
@@ -18,14 +19,15 @@ module.exports = async (req, res, next) => {
       res.clearCookie("authorization");
       return res.status(401).json({ message: "토큰 사용자가 존재하지 않습니다." });
     }
+
     res.locals.user = user;
-    // console.log("asdfafsdfds",res.locals.user)
+    // console.log(res.locals.user)
 
     next();
-  // } catch (error) {
-  //   res.clearCookie("authorization");
-  //   return res.status(401).json({
-  //     message: "비정상적인 요청입니다."
-  //   });
-  // }
+  } catch (error) {
+    res.clearCookie("authorization");
+    return res.status(401).json({
+      message: "비정상적인 요청입니다."
+    });
+  }
 }

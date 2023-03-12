@@ -28,7 +28,7 @@ router.get("/:postId", async (req, res) => {
     where: { postId },
   });
   
-  return res.status(200).json({ data: post });
+  return res.status(200).json({ post: post });
 });
 
 //게시글 작성api
