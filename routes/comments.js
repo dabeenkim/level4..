@@ -35,7 +35,7 @@ router.post("/:postId/comments", authMiddleware, async(req, res) => {
             postId : postId,
             nickname,
             comment,
-            createdAt : now,
+            createdAt : now, 
             updatedAt : now,
         })
 
