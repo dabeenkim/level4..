@@ -22,6 +22,7 @@ module.exports = async (req, res, next) => {
 
     res.locals.user = user;
     // console.log(res.locals.user)
+    // console.log(res.locals.user)
 
     next();
   } catch (error) {

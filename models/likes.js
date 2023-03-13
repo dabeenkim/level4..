@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class UserInfos extends Model {
+  class Likes extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -15,25 +15,29 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: 'userId', // 3. Users 모델의 userId 컬럼을
         foreignKey: 'UserId', // 4. UserInfos 모델의 UserId 컬럼과 연결합니다.
       });
+      this.belongsTo(models.Posts, {
+        targetKey: 'postId',
+        foreignKey: 'PostId',
+        onDelete: 'CASCADE',
+      })
     }
   }
 
-  UserInfos.init(
+  Likes.init(
     {
-      userInfoId: {
+      likeId: {
         allowNull: false, // NOT NULL
         autoIncrement: true, // AUTO_INCREMENT
         primaryKey: true, // Primary Key (기본키)
         type: DataTypes.INTEGER,
       },
+      PostId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       UserId: {
         allowNull: false, // NOT NULL
         type: DataTypes.INTEGER,
-        unique: true, // UNIQUE
-      },
-      nickname: {
-        allowNull: false, // NOT NULL
-        type: DataTypes.STRING,
       },
       createdAt: {
         allowNull: false, // NOT NULL
@@ -48,8 +52,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'UserInfos',
+      modelName: 'Likes',
     }
   );
-  return UserInfos;
+  return Likes;
 };
