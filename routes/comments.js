@@ -55,8 +55,8 @@ router.put("/:postId/comments/:commentId", authMiddleware, async(req, res) => {
     const change_comments = await Comments.findOne({ where : {commentId}})
 
     change_comments.comment = comment;
-
-    await change_comments.save();  
+  
+    await change_comments.save(); 
 
     res.status(200).json({Message: "댓글을 수정하였습니다."})
 
