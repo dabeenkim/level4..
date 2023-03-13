@@ -26,7 +26,6 @@ router.post("/:postId/comments", authMiddleware, async(req, res) => {
         //조회에서 postId를 불러오지않으면 나타나지 않아서 상관없다.
         const {postId} = req.params;
         const {comment} = req.body;
-
         const now = new Date();
         const created_Comment = await Comments.create({
             UserId : userId,
@@ -34,6 +33,7 @@ router.post("/:postId/comments", authMiddleware, async(req, res) => {
             nickname,
             comment,
             createdAt : now, 
+            createdAt : now,
             updatedAt : now,
         })
 
